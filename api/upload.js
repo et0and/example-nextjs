@@ -64,7 +64,7 @@ export default async function handler(req, res) {
 
     if (fileRes.status === 200) {
       // Generate the public URL for the uploaded .glb file
-      const fileUrl = `https://cdn.tewahi.me/${encodeURIComponent(glbFile.name)}`;
+      const fileUrl = `https://${bucketName}.s3.us-west-002.backblazeb2.com/${encodeURIComponent(glbFile.name)}`;
       return res.status(200).json({ fileUrl });
     } else {
       return res.status(500).json({ message: "Error uploading file" });
