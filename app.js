@@ -3,7 +3,7 @@ let magic = new Magic('pk_live_6420A7D201AAF767');
  /* 3️⃣ Implement Render Function */
  const render = async () => {
     const isLoggedIn = await magic.user.isLoggedIn();
-
+        
 /* Show login form if user is not logged in */
 let html = `
 <img class="rotating px-4 w-30 h-30" src="logo.png">
@@ -17,6 +17,9 @@ let html = `
 
 if (isLoggedIn) {
 /* Get user metadata including email */
+window.handleUpload = async (e) => {
+    e.preventDefault();
+
 const userMetadata = await magic.user.getMetadata();
 html = `
 <h1 class="text-2xl font-bold mb-6">Current user: ${userMetadata.email}</h1>
@@ -28,9 +31,6 @@ html = `
 <div id="modelViewerContainer" class="mt-8"></div>
 `;
 }
-
-const handleUpload = async (e) => {
-e.preventDefault();
 
 // Get the .glb file from the input
 const glbFile = document.getElementById("glbFile").files[0];
@@ -63,7 +63,7 @@ document.getElementById("app").innerHTML = html;
 };
 
   /* 4️⃣ Implement Login Handler */
-  const handleLogin = async (e) => {
+   window.handleLogin = async (e) => {
     e.preventDefault();
     const email = new FormData(e.target).get("email");
     if (email) {
@@ -74,7 +74,7 @@ document.getElementById("app").innerHTML = html;
   };
 
   /* 5️⃣ Implement Logout Handler */
-  const handleLogout = async () => {
+   window.handleLogout = async () => {
     await magic.user.logout();
     render();
   };
