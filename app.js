@@ -1,5 +1,3 @@
-import { Magic } from 'magic-sdk';
-
 let magic = new Magic('pk_live_6420A7D201AAF767');
 
  /* 3️⃣ Implement Render Function */
@@ -80,3 +78,5 @@ document.getElementById("app").innerHTML = html;
     await magic.user.logout();
     render();
   };
+
+  document.addEventListener('DOMContentLoaded', render);
