@@ -5,6 +5,7 @@
     "main": "index.html",
     "keywords": [],
     "dependencies": {
+        "magic-sdk": "^16.2.0",
         "micro": "^10.0.1",
         "micro-upload": "^1.0.1"
     },
