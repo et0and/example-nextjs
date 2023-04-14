@@ -3,5 +3,9 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.html",
-    "keywords": []
-  }
+    "keywords": [],
+    "dependencies": {
+        "micro": "^10.0.1",
+        "micro-upload": "^1.0.1"
+    }
+}
