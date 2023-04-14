@@ -60,9 +60,9 @@ body {
     }
   }
   .rotating {
-    -webkit-animation: rotating 6s linear infinite;
-    -moz-animation: rotating 6s linear infinite;
-    -ms-animation: rotating 6s linear infinite;
-    -o-animation: rotating 6s linear infinite;
-    animation: rotating 6s linear infinite;
+    -webkit-animation: rotating 45s linear infinite;
+    -moz-animation: rotating 45s linear infinite;
+    -ms-animation: rotating 45s linear infinite;
+    -o-animation: rotating 45s linear infinite;
+    animation: rotating 45s linear infinite;
   }

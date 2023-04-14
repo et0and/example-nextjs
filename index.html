@@ -39,7 +39,7 @@
     /* Get user metadata including email */
     const userMetadata = await magic.user.getMetadata();
     html = `
-      <img class="px-4 w-30 h-30" src="logo.png">  
+      <img class="rotating px-4 w-30 h-30" src="logo.png">  
       <h1 class="text-2xl font-bold mb-6">Current user: ${userMetadata.email}</h1>
       <button onclick="handleLogout()" class="block w-full py-2 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">Logout</button>
     `;
