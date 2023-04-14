@@ -20,6 +20,12 @@ if (isLoggedIn) {
 window.handleUpload = async (e) => {
     e.preventDefault();
 
+    const glbFileInput = document.getElementById("glbFile");
+  if (!glbFileInput) return;
+
+  const glbFile = glbFileInput.files[0];
+  if (!glbFile) return;
+
 const userMetadata = await magic.user.getMetadata();
 html = `
 <h1 class="text-2xl font-bold mb-6">Current user: ${userMetadata.email}</h1>
