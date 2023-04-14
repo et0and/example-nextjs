@@ -4,6 +4,7 @@
     <title>Studio - Arvault</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -30,7 +31,7 @@
     <h1 class="text-2xl font-bold mb-6">Please sign up or login</h1>
     <h5 class="text-base mb-6">Only Kāhui Ako schools are permitted to sign up</h5>
     <form onsubmit="handleLogin(event)" class="space-y-4">
-      <input type="email" name="email" required="required" placeholder="Enter your email" class="block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:bg-gray-400" />
+      <input type="email" name="email" required="required" placeholder="Enter your email" class="block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:bg-gray-200" />
       <button type="submit" class="block w-full py-2 px-4 bg-teal-500 text-white font-semibold rounded-lg hover:bg-teal-700">Send</button>
     </form>
   `;
