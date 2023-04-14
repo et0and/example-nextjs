@@ -10,11 +10,64 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <meta name="theme-color" content="#55b5a6" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <!-- 1️⃣ Install Magic SDK -->
     <script src="https://auth.magic.link/sdk"></script>
-    <link href="/dist/output.css" rel="stylesheet">
+    <body class="bg-gray-100 min-h-screen flex items-center justify-center" onload="render()">
+    <div id="app" class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+         
+    <script>
+      /* 2️⃣ Initialize Magic Instance */
+      let magic = new Magic("pk_live_6420A7D201AAF767");
+
+      /* 3️⃣ Implement Render Function */
+      const render = async () => {
+        const isLoggedIn = await magic.user.isLoggedIn();
+
+  /* Show login form if user is not logged in */
+  let html = `
+    <img class="rotating px-4 w-30 h-30" src="logo.png">
+    <h1 class="text-2xl font-bold mb-6">Please sign up or login</h1>
+    <h5 class="text-base mb-6">Only Kāhui Ako schools are permitted to sign up</h5>
+    <form onsubmit="handleLogin(event)" class="space-y-4">
+      <input type="email" name="email" required="required" placeholder="Enter your email" class="block w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:bg-gray-200" />
+      <button type="submit" class="block w-full py-2 px-4 bg-teal-500 text-white font-semibold rounded-lg hover:bg-teal-700">Send</button>
+    </form>
+  `;
+
+  if (isLoggedIn) {
+    /* Get user metadata including email */
+    const userMetadata = await magic.user.getMetadata();
+    html = `
+      <img class="rotating px-4 w-30 h-30" src="logo.png">  
+      <h1 class="text-2xl font-bold mb-6">Current user: ${userMetadata.email}</h1>
+      <button onclick="handleLogout()" class="block w-full py-2 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">Logout</button>
+    `;
+  }
+
+  document.getElementById("app").innerHTML = html;
+};
+
+      /* 4️⃣ Implement Login Handler */
+      const handleLogin = async (e) => {
+        e.preventDefault();
+        const email = new FormData(e.target).get("email");
+        if (email) {
+          /* One-liner login with email OTP 🤯 */
+          await magic.auth.loginWithEmailOTP({ email });
+          render();
+        }
+      };
+
+      /* 5️⃣ Implement Logout Handler */
+      const handleLogout = async () => {
+        await magic.user.logout();
+        render();
+      };
+    </script>
   </head>
-  <body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div id="app" class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">Loading...</div>
-    <script type="module" src="app.js"></script>
+  <body onload="render()">
+    <div id="app">Loading...</div>
   </body>
 </html>
