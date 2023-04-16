@@ -42,6 +42,13 @@
     html = `
       <img class="rotating px-4 w-30 h-30" src="logo.png">  
       <h1 class="text-2xl mb-6">Current user: ${userMetadata.email}</h1>
+      <!-- Add this inside the 'if (isLoggedIn)' block -->
+      <label class="block w-full py-2 px-4 bg-gray-300 text-black font-semibold rounded-lg mb-4">
+      Select a .glb file
+      <input id="glbFileInput" type="file" accept=".glb" class="hidden" />
+      </label>
+      <button onclick="handleUpload()" class="block w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-700 mb-4">Upload</button>
+
       <button onclick="handleLogout()" class="block w-full py-2 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700">Logout</button>
     `;
   }
@@ -49,25 +56,35 @@
   document.getElementById("app").innerHTML = html;
 };
 
-      /* 4️⃣ Implement Login Handler */
-      const handleLogin = async (e) => {
-        e.preventDefault();
-        const email = new FormData(e.target).get("email");
-        if (email) {
-          /* One-liner login with email OTP 🤯 */
-          await magic.auth.loginWithEmailOTP({ email });
-          render();
-        }
-      };
+      const handleUpload = async () => {
+        const fileInput = document.getElementById('glbFileInput');
+        const file = fileInput.files[0];
 
-      /* 5️⃣ Implement Logout Handler */
-      const handleLogout = async () => {
-        await magic.user.logout();
-        render();
+        if (!file) {
+          alert('Please select a .glb file to upload.');
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append('filename', file.name);
+        formData.append('file', file);
+
+        const response = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert('File uploaded successfully.');
+        } else {
+          alert('File upload failed.');
+        }
       };
     </script>
   </head>
   <body onload="render()">
-    <div id="app">Loading...</div>
+    <div id="app" class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">Loading...</div>
   </body>
 </html>
